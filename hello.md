@@ -25,3 +25,5 @@ pull = fetch + merge
 병합툴을 이용한 해결
 sourceTree를 이용한 해결
 
+장점: 쉽다
+단점: 커밋이 날아간다. push --force 가 필요하다.
