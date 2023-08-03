@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.majustory.k1.jungbo.JungboDao">
+   
+ 
+ <select id="tescherList" 
+            resultType="com.majustory.k1.jungbo.TeacherVO" >
+  select  *  from  TBL_TEACHER_202201
+  </select>
+
+ 
+  <select id="memberList" 
+            resultType="com.majustory.k1.jungbo.MemberVO" >
+
+	select  REGIST_MONTH,M.C_NO,C_NAME,CLASS_NAME,CLASS_AREA,TUITION ,GRADE   
+	from TBL_MEMBER_202201 M join TBL_CLASS_202201 C 
+	on M.C_NO = C.C_NO join TBL_TEACHER_202201 T 
+	on T.TEACHER_CODE = C.TEACHER_CODE  
+  </select>
+ 
+  
+ <select id="teacherMoneyList" 
+            resultType="com.majustory.k1.jungbo.MoneyListVO" >
+	select  T.TEACHER_CODE ,T.CLASS_NAME , T.TEACHER_NAME,SUM(C.TUITION) as  TUITION
+	from TBL_MEMBER_202201 M join TBL_CLASS_202201 C on M.C_NO = C.C_NO
+	join TBL_TEACHER_202201 T on T.TEACHER_CODE = C.TEACHER_CODE 
+	group  by T.TEACHER_CODE ,T.CLASS_NAME , T.TEACHER_NAME
+	order  by T.TEACHER_CODE asc 
+ </select>
+
+ <insert id="classFormInsert">
+   INSERT INTO TBL_CLASS_202201(REGIST_MONTH, C_NO,CLASS_AREA,TUITION,TEACHER_CODE)
+   VALUES(#{REGIST_MONTH}, #{C_NO},#{CLASS_AREA},#{TUITION},#{TEACHER_CODE} )
+ </insert>
+ 
+ </mapper>
