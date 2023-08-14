@@ -20,7 +20,7 @@
 	 <th th:text="강사자격취득일"/>
   </tr>    
 
- <tr th:each="m : ${li} "> 
+<tr th:each="m, rowStat : ${li}" th:class="${rowStat.index % 2 == 0 ? 'red-background' : ''}">
 	 <td align="center" th:text="${m.TEACHER_CODE}" />
 	 <td align="center" th:text="${m.TEACHER_NAME}" />
 	 <td align="center" th:text="${m.CLASS_NAME}" />
