@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:replace="/include/top"></div>
+<section>
+<br>
+<div align=center> 
+ <h1> 목록보기 </h1>
+ <table border="1">
+  	<tr>
+		<td>회원번호</td>
+		<td>주소</td>
+		<td>등급</td>
+		<td>이름</td>
+		<td>휴대폰 번호</td>
+		<td>사진</td>
+  	</tr>	 
+  	<tr th:each="m : ${li}" > 
+		<td th:text="${m.NO}"></td>
+		<td th:text="${m.ADDRESS}"></td>
+		<td th:text="${m.GRADE}"></td>
+		<td th:text="${m.NAME}"></td>
+		<td th:text="${m.PHONE}"></td>
+		<td><img th:src="@{/psd/files/}+${m.FILENAME}" width="100px" height="100px"/></td>
+	</tr>
+	<tr>
+		<td colspan="6" align="left">
+			 0. 전체 레코드 수  : [[${pageInfo.getTotalElements()}]] <br>
+			 1. 한 페이지의 크기 : [[${pageInfo.getSize()}]] <br>
+			 2. 현재 페이지 정보 : [[${pageInfo.getNumber()}]] <br>
+			 3. 전체페이지 수 : [[${pageInfo.getTotalPages()}]] <br>
+			 4. 결과 데이터 수 : [[${pageInfo.getNumberOfElements()}]] <br>
+			 5. 이전페이지의 존재여부 : [[${pageInfo.hasPrevious()}]] <br>
+			 6. 다음페이지의 존재여부 : [[${pageInfo.hasNext()}]] <br>
+			 7. 마지막 페이지 여부 : [[${pageInfo.isLast()}]] <br>
+		</td>
+	</tr>
+ </table>
+ <br><br>
+</div>
+</section>
+<div th:replace="/include/bottom::footer"></div>
+</body>
+</html>

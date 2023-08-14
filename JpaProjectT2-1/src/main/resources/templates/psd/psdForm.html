@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:replace="/include/top"></div>
+<section>
+<br><br>
+<div align=center> 
+ <h1> 회원가입하기 </h1>
+ <form name ="frm" action="PsdFormOK.do"
+      method="post" enctype="multipart/form-data"  >
+ <table border="1">
+  <tr><td>회원번호</td>
+      <td><input type="text" name="NO"> 예)C001 </td>  </tr>	 
+  <tr><td>회원이름</td>
+      <td> <input type="text" name="NAME">  </td>  </tr>	 
+  <tr><td>전화번호</td>
+      <td> <input type="text" name="PHONE">  </td>  </tr>	 
+  <tr><td>회원등급</td>
+      <td>
+		   <select name="GRADE">
+			 <option value="VIP">VIP</option>
+			 <option value="일반회원">일반회원</option>
+			 <option value="비회원">비회원</option>			    
+		   </select>	   
+	  </td>  </tr>	 
+
+  <tr><td>회원사진</td>
+      <td> <input type="file" name="FILE">  </td>  </tr>	 
+
+   <tr><td colspan="2"  align="center">
+	   <input type="submit" value="회원등록"> &emsp; 
+	   <input type="reset" value="다시작성"> 
+      </td> 
+  </tr>	 
+	 
+ </table>
+ </form> 
+ 
+</div>
+</section>
+<div th:replace="/include/bottom::footer"></div>
+</body>
+</html>

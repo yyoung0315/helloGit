@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:replace="/include/top"></div>
+
+<section>
+<br><br>
+<div align=center> 
+ <h1> 강사매출조회 </h1>
+ 
+  <table border=1  width="450"  height="200">
+  <tr align="center"> 
+	 <th th:text="강사코드"/>
+	 <th th:text="강의명"/>
+	 <th th:text="강사명"/>
+	 <th th:text="|총매출(원)|"/>
+  </tr>    
+
+ <tr th:each="m : ${li} "> 
+	 <td align="center" th:text="${m.getTEACHER_CODE()}" />
+	 <td align="center" th:text="${m.getCLASS_NAME()}" />
+	 <td align="center" th:text="${m.getTEACHER_NAME()}" />
+	 <td align="center" >
+		 <span th:text="'&#8361;' + |${#numbers.formatInteger(m.getTUITION(), 0, 'COMMA')}원|"></span>
+	 </td>
+  </tr> 
+
+ </table> 
+
+
+</div>
+</section>
+<div th:replace="/include/bottom::footer"></div>
+</body>
+</html>

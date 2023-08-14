@@ -1,0 +1,83 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:replace="/include/top"></div>
+<script>
+	
+ function fn_change1(){ //회원명 셀렉트박스
+	var fn = document.frm;
+	
+	/* 중 요 */
+	fn.TUITION.value = ""; //회원별 할인률을 적용해야하므로 수강료 초기화
+	fn.TEACHER_CODE.options[0].selected = true; //셀렉트박스 초기화
+	
+	fn.C_NO.value = fn.C_NAME.value; //회원번호 넣어주기
+	
+}
+
+function fn_change2(){ //강의신청 셀렉트박스
+
+	var fn = document.frm;
+	var price = fn.TEACHER_CODE.value * 1000; //수강료
+	var C_NO = fn.C_NO.value; // 회원번호 20000이상 50%할인
+	
+	if(C_NO >= 20000) price *= 0.5; //50% 할인
+	
+	fn.TUITION.value = price; //수강료 넣어주기
+}	
+	
+</script>
+
+<section>
+<br><br>
+<div align=center> 
+ <h1> 수 강 신 청 </h1>
+ <form name = frm action="classFormOK.do"  method="post" >
+ <table border="1">
+  <tr><td>수강월</td><td> <input type="text" name="REGIST_MONTH"> 예)2022년03월 -> 202203 </td>  </tr>	 
+  <tr><td>회원명</td><td> 
+   	   <select name="C_NAME" onchange="fn_change1();">
+		  <option value="" >회원명</option>
+		   
+		    <span  th:each="m : ${li2} "> 
+			<option th:value="${m.C_NO}">
+				[[${m.C_NAME}]]
+			</option>			
+            </span>
+            
+	   </select>
+	   </td>  
+  </tr>	 
+  <tr><td>회원번호</td><td> <input type="text" name="C_NO" readonly> 예)10001 </td>  </tr>	 
+  <tr><td>강의장소</td><td> <input type="text" name="CLASS_AREA"> </td>  </tr>	 
+  <tr><td>강의명</td>
+      <td>
+	   <select name="TEACHER_CODE" onchange="fn_change2()">
+			<option value="">강의신청</option>
+			
+			<span  th:each="m : ${li1} ">
+			<option th:value="${m.TEACHER_CODE}">
+				[[${m.CLASS_NAME}]]
+			</option>
+			</span>
+			
+	   </select>
+	   </td>  </tr>	 
+  <tr><td>수강료</td><td> <input type="text" name="TUITION" readonly> </td> </tr>	 
+  <tr><td colspan="2"  align="center">
+	   <input type="submit" value="수강신청"> &emsp; 
+	   <input type="reset" value="다시작성"> 
+      </td> 
+  </tr>	 
+	 
+ </table>
+ </form> 
+ 
+</div>
+</section>
+<div th:replace="/include/bottom::footer"></div>
+</body>
+</html>
